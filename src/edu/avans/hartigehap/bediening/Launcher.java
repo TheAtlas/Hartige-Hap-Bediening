@@ -17,6 +17,10 @@
 
 package edu.avans.hartigehap.bediening;
 
+import edu.avans.hartigehap.bediening.logic.OrderManager;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  *
  * @author David Verhaak
@@ -27,6 +31,16 @@ public class Launcher
 
     public static void main(String[] args) 
     {
+		OrderManager manager = OrderManager.getInstance();
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask()
+		{
+			@Override
+			public void run()
+			{
+				manager.refresh();
+			}
+		}, 0, 5000);
     }
 
 }

@@ -17,6 +17,9 @@
 
 package edu.avans.hartigehap.bediening.logic;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author David
@@ -24,4 +27,27 @@ package edu.avans.hartigehap.bediening.logic;
 public class OrderManager
 {
 	
+	private static OrderManager instance = null;
+	
+	private OrderManager()
+	{
+		
+	}
+	
+	public static OrderManager getInstance()
+	{
+		synchronized(OrderManager.class)
+		{
+			if(instance == null)
+			{
+				instance = new OrderManager();
+			}
+		}
+		return instance;
+	}
+	
+	public void refresh()
+	{
+		Logger.getLogger(OrderManager.class.getName()).log(Level.INFO, "Refresh");
+	}
 }
