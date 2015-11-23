@@ -28,23 +28,23 @@ public class Order
 
 	private int id;
 	private int guestId;
-	private OrderStatus status;
+	private PaymentStatus paymentStatus;
 	private String date;
 	private String time;
 	private double totalAmount;
 	private ArrayList<OrderDetail> orderDetails;
 
-	public Order(int id, int guestId, OrderStatus status, String date, String time, double totalAmount)
+	public Order(int id, int guestId, PaymentStatus paymentStatus, String date, String time, double totalAmount)
 	{
 		this.id = id;
 		this.guestId = guestId;
-		this.status = status;
+		this.paymentStatus = paymentStatus;
 		this.date = date;
 		this.time = time;
 		this.totalAmount = totalAmount;
 		orderDetails = new ArrayList<>();
 	}
-
+	
 	public int getId()
 	{
 		return id;
@@ -65,14 +65,14 @@ public class Order
 		this.guestId = guestId;
 	}
 
-	public OrderStatus getStatus()
+	public PaymentStatus getPaymentStatus()
 	{
-		return status;
+		return paymentStatus;
 	}
 
-	public void setStatus(OrderStatus status)
+	public void setPaymentStatus(PaymentStatus paymentStatus)
 	{
-		this.status = status;
+		this.paymentStatus = paymentStatus;
 	}
 
 	public String getDate()
@@ -112,7 +112,12 @@ public class Order
 
 	public void setOrderDetails(ArrayList<OrderDetail> orderDetails)
 	{
-		this.orderDetails.clear();
-		this.orderDetails.addAll(orderDetails);
+		orderDetails.clear();
+		orderDetails.addAll(orderDetails);
+	}
+	
+	public void addOrderDetail(OrderDetail orderDetail)
+	{
+		orderDetails.add(orderDetail);
 	}
 }
