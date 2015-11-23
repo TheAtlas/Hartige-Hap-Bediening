@@ -28,11 +28,6 @@ public class OrderManager
 
 	private static OrderManager instance = null;
 
-	private OrderManager()
-	{
-
-	}
-
 	public static OrderManager getInstance()
 	{
 		synchronized (OrderManager.class)
@@ -45,6 +40,11 @@ public class OrderManager
 		return instance;
 	}
 
+	private OrderManager()
+	{
+
+	}
+	
 	public void refresh()
 	{
 		Logger.getLogger(OrderManager.class.getName()).log(Level.INFO, "Refresh");

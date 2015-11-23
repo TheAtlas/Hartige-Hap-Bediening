@@ -23,4 +23,22 @@ package edu.avans.hartigehap.bediening.logic;
 public class GuestManager
 {
 
+	private static GuestManager instance = null;
+
+	public static GuestManager getInstance()
+	{
+		synchronized(GuestManager.class)
+		{
+			if(instance == null)
+			{
+				instance = new GuestManager();
+			}
+		}
+		return instance;
+	}
+	
+	private GuestManager()
+	{
+
+	}
 }

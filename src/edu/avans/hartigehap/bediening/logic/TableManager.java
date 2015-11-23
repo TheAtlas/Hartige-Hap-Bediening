@@ -23,4 +23,22 @@ package edu.avans.hartigehap.bediening.logic;
 public class TableManager
 {
 
+	private static TableManager instance = null;
+
+	public static TableManager getInstance()
+	{
+		synchronized(TableManager.class)
+		{
+			if(instance == null)
+			{
+				instance = new TableManager();
+			}
+		}
+		return instance;
+	}
+	
+	private TableManager()
+	{
+
+	}
 }

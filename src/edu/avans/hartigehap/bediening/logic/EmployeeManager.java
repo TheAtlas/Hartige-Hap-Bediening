@@ -23,4 +23,22 @@ package edu.avans.hartigehap.bediening.logic;
 public class EmployeeManager
 {
 
+	private static EmployeeManager instance = null;
+
+	public static EmployeeManager getInstance()
+	{
+		synchronized(EmployeeManager.class)
+		{
+			if(instance == null)
+			{
+				instance = new EmployeeManager();
+			}
+		}
+		return instance;
+	}
+	
+	private EmployeeManager()
+	{
+
+	}
 }

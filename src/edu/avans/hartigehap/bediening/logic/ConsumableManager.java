@@ -23,4 +23,22 @@ package edu.avans.hartigehap.bediening.logic;
 public class ConsumableManager
 {
 
+	private static ConsumableManager instance = null;
+
+	public static ConsumableManager getInstance()
+	{
+		synchronized(ConsumableManager.class)
+		{
+			if(instance == null)
+			{
+				instance = new ConsumableManager();
+			}
+		}
+		return instance;
+	}
+	
+	private ConsumableManager()
+	{
+
+	}
 }
