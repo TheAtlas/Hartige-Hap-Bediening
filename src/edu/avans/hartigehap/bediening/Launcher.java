@@ -18,6 +18,7 @@ package edu.avans.hartigehap.bediening;
 
 
 import edu.avans.hartigehap.bediening.logic.OrderManager;
+import edu.avans.hartigehap.bediening.ui.SummaryGUI;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,5 +42,6 @@ public class Launcher
 				manager.refresh();
 			}
 		}, 0, 5000);
+		new SummaryGUI().setVisible(true);
 	}
 }
