@@ -16,6 +16,10 @@
  */
 package edu.avans.hartigehap.bediening.ui;
 
+import edu.avans.hartigehap.bediening.logic.OrderManager;
+import edu.avans.hartigehap.bediening.model.Order;
+import edu.avans.hartigehap.bediening.model.OrderTableModel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -61,8 +65,9 @@ public class DetailGUI extends JDialog
 		JScrollPane dataScrollPane = new JScrollPane();
 		JScrollPane foodScrollPane = new JScrollPane();
 		JButton backButton = new JButton("Terug");
-		
-		
+		Order newOrder = null;
+		OrderManager manager = OrderManager.getInstance();
+		newOrder = manager.getOrderByTableNumber(tableNumber);
 		leftPanel.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
 		leftPanel.setPreferredSize(new Dimension(400, 350));
 		
@@ -79,6 +84,12 @@ public class DetailGUI extends JDialog
 				"Tafelnummer", "Gastnaam", "Totale prijs", "Datum", "Status"
 			}
 		));
+		if(newOrder != null) {
+			OrderTableModel model = new OrderTableModel(newOrder);
+			infoTable.setModel(model);
+		}
+
+
 		infoTable.setPreferredSize(new Dimension(350, 64));
 		infoScrollPane.setPreferredSize(new Dimension(350, 42));
 		infoScrollPane.setViewportView(infoTable);

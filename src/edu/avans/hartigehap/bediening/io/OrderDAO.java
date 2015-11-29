@@ -16,11 +16,54 @@
  */
 package edu.avans.hartigehap.bediening.io;
 
+import edu.avans.hartigehap.bediening.model.Order;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author David
  */
 public class OrderDAO
 {
+
+    public Order getOrderByTableNumber(int tableNumber){
+        Order order = null;
+    DatabaseConnection connection = new DatabaseConnection();
+        if(connection.open()){
+
+            try{
+                PreparedStatement statement = connection.createStatement("SELECT * FROM dhh_order where TABLEtableNo = ? and paymentStatus = ?");
+                statement.setInt(1, tableNumber);
+                statement.setString(2,"Unpayed");
+
+                ResultSet resultSet = connection.execute(statement);
+                if(resultSet != null){
+                    while(resultSet.next()){
+                        int id = resultSet.getInt("orderNo");
+                        String paymentStatus = resultSet.getString("paymentStatus");
+                        int tableNo = resultSet.getInt("TABLEtableNo");
+
+                         Order newOrder = new Order(id,1,null,"19-20-2010","9 uur",20.00,tableNo);
+                        order = newOrder;
+                    }
+
+
+                }
+            }
+            catch(SQLException e) {
+
+                e.printStackTrace();
+            }
+
+
+
+            connection.close();
+        }
+
+    return order;
+    }
 
 }

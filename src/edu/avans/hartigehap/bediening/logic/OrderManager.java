@@ -16,6 +16,9 @@
  */
 package edu.avans.hartigehap.bediening.logic;
 
+import edu.avans.hartigehap.bediening.io.OrderDAO;
+import edu.avans.hartigehap.bediening.model.Order;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,4 +55,15 @@ public class OrderManager
 	{
 		Logger.getLogger(OrderManager.class.getName()).log(Level.INFO, "Refresh");
 	}
+
+
+
+	public Order getOrderByTableNumber(int tableNumber){
+
+        OrderDAO orderDAO = new OrderDAO();
+
+
+    return orderDAO.getOrderByTableNumber(tableNumber);
+    }
 }
+

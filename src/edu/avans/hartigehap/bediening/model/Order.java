@@ -32,9 +32,10 @@ public class Order
 	private String date;
 	private String time;
 	private double totalAmount;
+	private int tableNumber;
 	private ArrayList<OrderDetail> orderDetails;
 
-	public Order(int id, int guestId, PaymentStatus paymentStatus, String date, String time, double totalAmount)
+	public Order(int id, int guestId, PaymentStatus paymentStatus, String date, String time, double totalAmount,int tableNumber)
 	{
 		this.id = id;
 		this.guestId = guestId;
@@ -42,9 +43,18 @@ public class Order
 		this.date = date;
 		this.time = time;
 		this.totalAmount = totalAmount;
+		this.tableNumber = tableNumber;
 		orderDetails = new ArrayList<>();
 	}
-	
+
+	public int getTableNumber() {
+		return tableNumber;
+	}
+
+	public void setTableNumber(int tableNumber) {
+		this.tableNumber = tableNumber;
+	}
+
 	public int getId()
 	{
 		return id;
@@ -115,7 +125,7 @@ public class Order
 		orderDetails.clear();
 		orderDetails.addAll(orderDetails);
 	}
-	
+
 	public void addOrderDetail(OrderDetail orderDetail)
 	{
 		orderDetails.add(orderDetail);

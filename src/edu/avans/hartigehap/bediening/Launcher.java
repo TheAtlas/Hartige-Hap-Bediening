@@ -32,7 +32,7 @@ public class Launcher
 
 	public static void main(String[] args)
 	{
-		OrderManager manager = OrderManager.getInstance();
+		final OrderManager manager = OrderManager.getInstance();
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask()
 		{

@@ -16,6 +16,8 @@
  */
 package edu.avans.hartigehap.bediening.ui;
 
+import edu.avans.hartigehap.bediening.logic.OrderManager;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dialog;
@@ -85,6 +87,7 @@ public class SummaryGUI extends JFrame
 		tablesPanel.setLayout(new GridLayout(4, 3, 20, 20));
 		for (int i = 1; i < 13; i++)
 		{
+
 			JButton button = new JButton("Tafel " + i);
 			button.setName("" + i);
 			button.addActionListener(new ActionListener()
@@ -94,6 +97,7 @@ public class SummaryGUI extends JFrame
 				{
 					JButton source = (JButton) actionEvent.getSource();
 					checkDetail(Integer.parseInt(source.getName()));
+
 				}
 			});
 			tablesPanel.add(button);

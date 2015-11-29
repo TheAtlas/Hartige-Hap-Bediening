@@ -16,6 +16,10 @@
  */
 package edu.avans.hartigehap.bediening.io;
 
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author David
@@ -23,4 +27,95 @@ package edu.avans.hartigehap.bediening.io;
 public class DatabaseConnection
 {
 
+    private static final Logger LOG = Logger.getLogger(DatabaseConnection.class.getName());
+
+    private Connection connection;
+
+    public DatabaseConnection()
+    {
+        connection = null;
+    }
+
+    public boolean open()
+    {
+        boolean result = true;
+        if(connection == null)
+        {
+            try
+            {
+                connection = DriverManager.getConnection("jdbc:mysql://145.48.6.147/ivp4a", "root", "10ec4u");
+                result = true;
+            } catch(SQLException exception)
+            {
+                LOG.log(Level.SEVERE, "", exception);
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    public boolean isOpen()
+    {
+        if(connection != null)
+        {
+            try
+            {
+                return !connection.isClosed();
+            } catch(SQLException exception)
+            {
+                LOG.log(Level.SEVERE, "", exception);
+            }
+        }
+        return false;
+    }
+
+    public void close()
+    {
+        try
+        {
+            connection.close();
+        } catch(SQLException exception)
+        {
+            LOG.log(Level.SEVERE, "", exception);
+        }
+    }
+
+    public PreparedStatement createStatement(String query)
+    {
+        if(query != null && isOpen())
+        {
+            try
+            {
+                return connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            } catch(SQLException exception)
+            {
+                LOG.log(Level.SEVERE, "", exception);
+            }
+        }
+        return null;
+    }
+
+    public boolean executeUpdate(PreparedStatement query)
+    {
+        try
+        {
+            return query.executeUpdate() > 0;
+        } catch(SQLException exception)
+        {
+            LOG.log(Level.SEVERE, "", exception);
+        }
+        return false;
+    }
+
+    public ResultSet execute(PreparedStatement query)
+    {
+        try
+        {
+            return query.executeQuery();
+        } catch(SQLException exception)
+        {
+            LOG.log(Level.SEVERE, "", exception);
+        }
+        return null;
+    }
 }
