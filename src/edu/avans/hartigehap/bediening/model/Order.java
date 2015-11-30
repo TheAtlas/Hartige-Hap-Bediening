@@ -17,117 +17,113 @@
 package edu.avans.hartigehap.bediening.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
- *
  * @author David Verhaak
  * @version 1.0.0
  */
-public class Order
-{
+public class Order {
 
-	private int id;
-	private int guestId;
-	private PaymentStatus paymentStatus;
-	private String date;
-	private String time;
-	private double totalAmount;
-	private int tableNumber;
-	private ArrayList<OrderDetail> orderDetails;
+    private int id;
+    private int guestId;
+    private PaymentStatus paymentStatus;
+    //	private String date;
+//	private String time;
+    private String date;
+    private double totalAmount;
+    private int tableNumber;
+    private ArrayList<OrderDetail> orderDetails;
 
-	public Order(int id, int guestId, PaymentStatus paymentStatus, String date, String time, double totalAmount,int tableNumber)
-	{
-		this.id = id;
-		this.guestId = guestId;
-		this.paymentStatus = paymentStatus;
-		this.date = date;
-		this.time = time;
-		this.totalAmount = totalAmount;
-		this.tableNumber = tableNumber;
-		orderDetails = new ArrayList<>();
-	}
 
-	public int getTableNumber() {
-		return tableNumber;
-	}
+    public Order(int id, int guestId, PaymentStatus paymentStatus, String date, double totalAmount, int tableNumber) {
+        this.id = id;
+        this.guestId = guestId;
+        this.paymentStatus = paymentStatus;
+        this.date = date;
+//		this.time = time;
+        this.totalAmount = totalAmount;
+        this.tableNumber = tableNumber;
+        orderDetails = new ArrayList<>();
+    }
 
-	public void setTableNumber(int tableNumber) {
-		this.tableNumber = tableNumber;
-	}
+    public int getTableNumber() {
+        return tableNumber;
+    }
 
-	public int getId()
-	{
-		return id;
-	}
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getGuestId()
-	{
-		return guestId;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setGuestId(int guestId)
-	{
-		this.guestId = guestId;
-	}
+    public int getGuestId() {
+        return guestId;
+    }
 
-	public PaymentStatus getPaymentStatus()
-	{
-		return paymentStatus;
-	}
+    public void setGuestId(int guestId) {
+        this.guestId = guestId;
+    }
 
-	public void setPaymentStatus(PaymentStatus paymentStatus)
-	{
-		this.paymentStatus = paymentStatus;
-	}
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
 
-	public String getDate()
-	{
-		return date;
-	}
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
 
-	public void setDate(String date)
-	{
-		this.date = date;
-	}
+//	public String getDate()
+//	{
+//		return date;
+//	}
+//
+//	public void setDate(String date)
+//	{
+//		this.date = date;
+//	}
 
-	public String getTime()
-	{
-		return time;
-	}
+    //	public String getTime()
+//	{
+//		return time;
+//	}
+//
+//	public void setTime(String time)
+//	{
+//		this.time = time;
+//	}
+    public String getDate() {
+        return date;
+    }
 
-	public void setTime(String time)
-	{
-		this.time = time;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public double getTotalAmount()
-	{
-		return totalAmount;
-	}
+    public double getTotalAmount() {
+        return totalAmount;
+    }
 
-	public void setTotalAmount(double totalAmount)
-	{
-		this.totalAmount = totalAmount;
-	}
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
-	public ArrayList<OrderDetail> getOrderDetails()
-	{
-		return orderDetails;
-	}
+    public ArrayList<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
 
-	public void setOrderDetails(ArrayList<OrderDetail> orderDetails)
-	{
-		orderDetails.clear();
-		orderDetails.addAll(orderDetails);
-	}
+    public void setOrderDetails(ArrayList<OrderDetail> orderDetails) {
+        orderDetails.clear();
+        orderDetails.addAll(orderDetails);
+    }
 
-	public void addOrderDetail(OrderDetail orderDetail)
-	{
-		orderDetails.add(orderDetail);
-	}
+    public void addOrderDetail(OrderDetail orderDetail) {
+        orderDetails.add(orderDetail);
+    }
 }

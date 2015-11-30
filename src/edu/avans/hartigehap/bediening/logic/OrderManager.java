@@ -26,44 +26,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author David
  */
-public class OrderManager
-{
+public class OrderManager {
 
-	private static OrderManager instance = null;
+    private static OrderManager instance = null;
 
-	public static OrderManager getInstance()
-	{
-		synchronized (OrderManager.class)
-		{
-			if (instance == null)
-			{
-				instance = new OrderManager();
-			}
-		}
-		return instance;
-	}
+    public static OrderManager getInstance() {
+        synchronized (OrderManager.class) {
+            if (instance == null) {
+                instance = new OrderManager();
+            }
+        }
+        return instance;
+    }
 
-	private OrderManager()
-	{
+    private OrderManager() {
 
-	}
-	
-	public void refresh()
-	{
-		Logger.getLogger(OrderManager.class.getName()).log(Level.INFO, "Refresh");
-	}
+    }
+
+    public void refresh() {
+        Logger.getLogger(OrderManager.class.getName()).log(Level.INFO, "Refresh");
+    }
 
 
-
-	public Order getOrderByTableNumber(int tableNumber){
+    public Order getOrderByTableNumber(int tableNumber) {
 
         OrderDAO orderDAO = new OrderDAO();
-
-
-    return orderDAO.getOrderByTableNumber(tableNumber);
+        return orderDAO.getOrderByTableNumber(tableNumber);
     }
+
+
 }
 
