@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 public class OrderManager {
 
     private static OrderManager instance = null;
-
+    private OrderDAO orderDAO;
     public static OrderManager getInstance() {
         synchronized (OrderManager.class) {
             if (instance == null) {
@@ -42,7 +42,7 @@ public class OrderManager {
     }
 
     private OrderManager() {
-
+        orderDAO = new OrderDAO();
     }
 
     public void refresh() {
@@ -51,9 +51,13 @@ public class OrderManager {
 
 
     public Order getOrderByTableNumber(int tableNumber) {
-
-        OrderDAO orderDAO = new OrderDAO();
         return orderDAO.getOrderByTableNumber(tableNumber);
+    }
+
+    public void changeStatusById(int orderId,int newStatus,String itemName){
+        System.out.println("new orderstatus  = " + newStatus);
+        orderDAO.changeStatusById(orderId,newStatus,itemName);
+
     }
 
 

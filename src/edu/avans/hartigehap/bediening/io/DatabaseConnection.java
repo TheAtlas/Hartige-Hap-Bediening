@@ -43,7 +43,7 @@ public class DatabaseConnection
         {
             try
             {
-                connection = DriverManager.getConnection("jdbc:mysql://145.48.6.147/ivp4a", "root", "10ec4u");
+                connection = DriverManager.getConnection("jdbc:mysql://145.48.6.147/ivp4a2", "root", "10ec4u");
                 result = true;
             } catch(SQLException exception)
             {

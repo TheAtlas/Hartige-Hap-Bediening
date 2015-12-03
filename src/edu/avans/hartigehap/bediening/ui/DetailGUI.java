@@ -17,10 +17,7 @@
 package edu.avans.hartigehap.bediening.ui;
 
 import edu.avans.hartigehap.bediening.logic.OrderManager;
-import edu.avans.hartigehap.bediening.model.DetailOrderTableModel;
-import edu.avans.hartigehap.bediening.model.Order;
-import edu.avans.hartigehap.bediening.model.OrderDetail;
-import edu.avans.hartigehap.bediening.model.OrderTableModel;
+import edu.avans.hartigehap.bediening.model.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -43,8 +40,12 @@ import javax.swing.table.DefaultTableModel;
  * @author David
  */
 public class DetailGUI extends JDialog {
+    private OrderManager manager;
+    private int orderId;
+    private Order newOrder;
 
-    public DetailGUI(Frame parent, boolean modal, int tableNumber) {
+
+    public DetailGUI(Frame parent, boolean modal, final int tableNumber) {
         super(parent, modal);
         setPreferredSize(new Dimension(700, 350));
         setSize(750, 350);
@@ -58,15 +59,17 @@ public class DetailGUI extends JDialog {
         JLabel orderDataLabel = new JLabel("Orderinhoud");
         JLabel orderFoodLabel = new JLabel("Order maaltijden");
         JTable infoTable = new JTable();
-        JTable dataTable = new JTable();
+        final JTable dataTable = new JTable();
         JTable foodTable = new JTable();
         JScrollPane infoScrollPane = new JScrollPane();
         JScrollPane dataScrollPane = new JScrollPane();
         JScrollPane foodScrollPane = new JScrollPane();
         JButton backButton = new JButton("Terug");
-        Order newOrder = null;
-        OrderManager manager = OrderManager.getInstance();
+
+
+        manager = OrderManager.getInstance();
         newOrder = manager.getOrderByTableNumber(tableNumber);
+
         leftPanel.setBorder(BorderFactory.createEmptyBorder(30, 10, 10, 10));
         leftPanel.setPreferredSize(new Dimension(400, 350));
 
@@ -97,8 +100,7 @@ public class DetailGUI extends JDialog {
         dataTable.setModel(new DefaultTableModel(
                 new Object[][]
                         {
-                                {null, null, null, null, null, null},
-                                {null, null, null, null, null, null}
+
                         },
                 new String[]
                         {
@@ -153,7 +155,74 @@ public class DetailGUI extends JDialog {
 
         getContentPane().add(leftPanel, BorderLayout.WEST);
         getContentPane().add(rightPanel, BorderLayout.EAST);
+        if (dataTable.getRowCount() > 0) {
+            dataTable.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    int row = dataTable.rowAtPoint(evt.getPoint());
+                    int col = dataTable.columnAtPoint(evt.getPoint());
+                    int selected = 0;
+                    if (row >= 0 && col >= 5) {
+                        if (dataTable.getValueAt(row, col).toString() == "NOT_STARTED") {
+                            selected = 0;
+                        } else if (dataTable.getValueAt(row, col).toString() == "STARTED") {
+
+                            selected = 1;
+                        } else if (dataTable.getValueAt(row, col).toString() == "READY") {
+
+                            selected = 2;
+                        } else if (dataTable.getValueAt(row, col).toString() == "FINISHED") {
+
+                            selected = 3;
+                        }
+                        orderId = newOrder.getId();
+                        String itemName = (String) dataTable.getValueAt(row, 0);
+                        changeStatus(selected, dataTable, row, col, orderId, itemName);
+
+                    }
+                }
+
+
+            });
+        }
     }
+
+
+    public void changeStatus(int selected, JTable dataTable, int row, int col, int orderId, String itemName) {
+        System.out.println(dataTable.getValueAt(row, col));
+
+        OrderStatus status = OrderStatus.values()[selected];
+        switch (status) {
+            case NOT_STARTED:
+
+                manager.changeStatusById(orderId, 2, itemName);
+                dataTable.setValueAt(OrderStatus.STARTED, row, col);
+                break;
+
+            case STARTED:
+
+                manager.changeStatusById(orderId, 3, itemName);
+                dataTable.setValueAt(OrderStatus.READY, row, col);
+
+                break;
+
+            case READY:
+
+                manager.changeStatusById(orderId, 4, itemName);
+                dataTable.setValueAt(OrderStatus.FINISHED, row, col);
+                break;
+
+            case FINISHED:
+
+                manager.changeStatusById(orderId, 1, itemName);
+                dataTable.setValueAt(OrderStatus.NOT_STARTED, row, col);
+                break;
+
+
+        }
+
+    }
+
 
     private void back() {
         this.dispose();

@@ -64,7 +64,7 @@ public class OrderDAO {
 
                         if (subResultSet != null) {
                             while (subResultSet.next()) {
-                                OrderDetail orderDetails = new OrderDetail(subResultSet.getInt("ORDERorderNo"), OrderStatus.NOT_STARTED, subResultSet.getInt("EMPLOYEEemployeeid"), subResultSet.getInt("amount"), subResultSet.getString("description"), subResultSet.getString("ITEMitemName"), subResultSet.getDouble("Itemtotalprice"));
+                                OrderDetail orderDetails = new OrderDetail(subResultSet.getInt("ORDERorderNo"), OrderStatus.values()[subResultSet.getInt("orderStatus")-1], subResultSet.getInt("EMPLOYEEemployeeid"), subResultSet.getInt("amount"), subResultSet.getString("description"), subResultSet.getString("ITEMitemName"), subResultSet.getDouble("Itemtotalprice"));
                                 order.addOrderDetail(orderDetails);
                             }
                         }
@@ -84,4 +84,27 @@ public class OrderDAO {
         return order;
     }
 
+    public void changeStatusById(int orderId, int newStatus,String itemName) {
+        System.out.println(orderId + "orderstatus = " +   newStatus + itemName);
+        DatabaseConnection connection = new DatabaseConnection();
+        if (connection.open()) {
+
+            try {
+                PreparedStatement statement = connection.createStatement("UPDATE dhh_orderitem set orderStatus = ? where ORDERorderNo = ? and ITEMitemName = ?");
+                statement.setInt(1,newStatus);
+                statement.setInt(2,orderId);
+                statement.setString(3,itemName);
+                statement.execute();
+            }
+            catch (SQLException e) {
+
+                e.printStackTrace();
+            }
+
+
+            connection.close();
+        }
+
+
+    }
 }

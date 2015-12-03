@@ -39,7 +39,7 @@ public class Launcher
 			@Override
 			public void run()
 			{
-				manager.refresh();
+				//manager.refresh();
 			}
 		}, 0, 5000);
 		new SummaryGUI().setVisible(true);

@@ -19,6 +19,7 @@ package edu.avans.hartigehap.bediening.ui;
 import edu.avans.hartigehap.bediening.logic.OrderManager;
 import edu.avans.hartigehap.bediening.model.Order;
 import edu.avans.hartigehap.bediening.model.OrderDetail;
+import edu.avans.hartigehap.bediening.model.OrderStatus;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
